@@ -1,16 +1,43 @@
-package org.example.Calculadora
+package Calculadora
+import Utils.readInt
+import java.util.Scanner
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+// Objeto Scanner global
+val scan: Scanner = Scanner(System.`in`)
+
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
-    }
+    var continuar: Int
+    do {
+        mostrarMenu()
+
+        // Leer la operación seleccionada
+        val operacion = readInt(
+            "Elija una operación:",
+            "Ingrese un número válido.",
+            "El numero esta fuera del rango",
+            0,
+            7 // Validar dentro del rango de operaciones
+        )
+
+        if (operacion == 0) {
+            println("Saliendo de la calculadora. ¡Hasta luego!")
+            break
+        }
+
+        // Ejecutar la operación seleccionada
+        ejecutarOperacion(operacion)
+
+        println("\n¿Desea realizar otra operación? Ingrese 0 para salir o cualquier otro número para continuar.")
+        continuar = readInt(
+            "Ingrese su elección:",
+            "Ingrese un número válido.",
+            "",
+            Int.MIN_VALUE,
+            Int.MAX_VALUE
+        )
+
+    } while (continuar != 0)
+
+    println("Saliendo de la calculadora. ¡Hasta luego!")
 }
